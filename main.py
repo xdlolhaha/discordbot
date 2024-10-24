@@ -4,21 +4,21 @@ from discord.ext import commands, tasks
 import requests
 
 
-DISCORD_TOKEN = 'MTI1NTI2ODU1MTA3ODQ0NTA5Ng.G64ywg.M8CAMv2hj83NXsQL_QtwRh3SIue6WR7QDLOHhw'
+TOKEN = ''
 
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix=",", intents=intents)
 
 # status
 status_list = [
-    discord.Game(name="made by 5np"),
+    discord.Game(name="status"),
     discord.Streaming(name="Streaming Now!", url="https://twitch.tv/streamer"),
-    discord.Activity(type=discord.ActivityType.listening, name="regrets.lol"),
-    discord.Activity(type=discord.ActivityType.watching, name="alone.lol")
+    discord.Activity(type=discord.ActivityType.listening, name="status"),
+    discord.Activity(type=discord.ActivityType.watching, name="status")
 ]
 
 current_status_index = 0
@@ -96,7 +96,7 @@ async def ip_lookup(interaction: discord.Interaction, ip: str):
     else:
         await interaction.response.send_message("Error fetching data from the IP lookup service.", ephemeral=True)
 
-# Slash command to DM all members with a specific role
+
 @bot.tree.command(name="dm_role", description="DM all members with a specific role")
 @app_commands.describe(role="The role to send a message to", message="The message to send")
 async def dm_role(interaction: discord.Interaction, role: discord.Role, message: str):
@@ -116,7 +116,7 @@ async def dm_role(interaction: discord.Interaction, role: discord.Role, message:
     
     await interaction.followup.send("Finished sending DMs.", ephemeral=True)
 
-# Slash command to show help information
+
 @bot.tree.command(name="help", description="Shows all available commands")
 async def help_command(interaction: discord.Interaction):
     commands = [
@@ -132,4 +132,4 @@ async def help_command(interaction: discord.Interaction):
     
     await interaction.response.send_message(embed=embed)
 
-bot.run(DISCORD_TOKEN)
+bot.run(TOKEN)
